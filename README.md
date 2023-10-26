@@ -238,7 +238,7 @@ On top of that, all the issues u quoted involves user facing functions, whereas 
 
 If a suggestion made in the in-scope file fix the problem, I would say this is a valid issue. Kindly read 0x52 duplicate issue of this.
 
-**mohammedrizwann123**
+**0xRizwan**
 
 > > Escalate
 > > i don't agree with both escalations.
@@ -332,6 +332,15 @@ Escalation status:
 - [jingyi2811](https://github.com/sherlock-audit/2023-07-kyber-swap-judging/issues/25/#issuecomment-1730719530): accepted
 - [nevillehuang](https://github.com/sherlock-audit/2023-07-kyber-swap-judging/issues/25/#issuecomment-1728122392): rejected
 - [jkoppel](https://github.com/sherlock-audit/2023-07-kyber-swap-judging/issues/25/#issuecomment-1728144121): rejected
+
+**manhlx3006**
+
+For current deployments, we have initialized all contracts with a multisig as the owner.
+PR to update dependencies for future deployments: https://github.com/KyberNetwork/ks-elastic-sc/pull/21
+
+**IAm0x52**
+
+Fix looks good. Update to OZ library only changes UUPS and nothing else
 
 # Issue M-2: Router.sol is vulnerable to address collission 
 
@@ -586,4 +595,30 @@ Escalations have been resolved successfully!
 
 Escalation status:
 - [IAm0x52](https://github.com/sherlock-audit/2023-07-kyber-swap-judging/issues/90/#issuecomment-1730309361): accepted
+
+**c14sh**
+
+Great discussion!
+@IAm0x52 Is the PoC written by zobront? or is it that 0x52 == zobront?
+
+**c14sh**
+
+> Great discussion! @IAm0x52 Is the PoC written by zobront? or is it that 0x52 == zobront?
+
+Seems the PoC is finding the first hash of 256 hashes in 24bit space, not collision. Surely, the answer is 2^24/256 = 65536 in average from probabilistic perspective.
+
+
+**manhlx3006**
+
+[Will fix in the upcoming version of the protocol]
+
+Thanks for all provided information and explanation. We understand the risk of the issue.
+
+Given the fact that the timeline is unclear and depends on many factors, as well as the Factory has been deployed on all supported networks (which can not have logics of storing the list deployed pools), we will put this fix into our in-progress and up-coming protocol.
+
+For the Router contract, since it is used mostly by developers (as we are an Aggregator and users interact with another Router instead of this one), we will put a notice into our docs and advice developers to be careful when approving token allowances to this Router contract, and the new fix will also be added into the upcoming version, and adjust the Router logic accordingly.
+
+In the mean time, we are analyzing the potential risks as well as the likelihood of the issue (computation power, expenses, etc).
+
+Thanks all.
 
